@@ -1,3 +1,4 @@
+
 public class Solution {
     public void Mirror(TreeNode root) {
         if(root == null)
@@ -16,3 +17,4 @@ public class Solution {
         }
     }
 }
+
