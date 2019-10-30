@@ -1,3 +1,5 @@
+//思路：中序遍历
+
 public class Solution {
     int cnt = 0;
     TreeNode tmp = null;
