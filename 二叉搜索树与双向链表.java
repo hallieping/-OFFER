@@ -31,3 +31,33 @@
         }
         return root;
     }
+
+
+//方法二：递归
+
+import java.util.Stack;
+public class Solution {
+    TreeNode head = null;
+    TreeNode realHead = null;
+    public TreeNode Convert(TreeNode root) { 
+        if(root==null)
+            return null;
+        helper(root);
+        return realHead;
+    }
+    private void helper(TreeNode root) {
+        if(root == null) 
+            return;
+        helper(root.left);
+        if(head == null) {
+            head = root;
+            realHead = root;
+        }
+        else {
+            head.right = root;
+            root.left = head;
+            head = root;
+        }
+        helper(root.right);
+    }
+}
