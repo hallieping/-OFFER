@@ -1,20 +1,18 @@
 public class Solution {
-
-    public ListNode EntryNodeOfLoop(ListNode pHead)
-    {
+    public ListNode detectCycle(ListNode head) {
         // 从原点到入口，和相遇点到入口距离一样；
-        if(pHead == null||pHead.next == null) return null;
-        ListNode fast = pHead;
-        ListNode slow = pHead;
-        while(fast.next.next!= null && slow.next!= null) {
+        if(head == null||head.next == null || head.next.next == null) return null;
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast!= null && fast.next!= null) {
             fast = fast.next.next;
             slow = slow.next;
             if(slow == fast)
                 break;
         }
-        if((fast.next.next == null) || (slow.next== null)) 
+        if((fast == null) || (fast.next== null)) 
             return null;
-        fast = pHead;
+        fast = head;
         while(fast != slow) {
             fast = fast.next;
             slow = slow.next;
@@ -22,3 +20,4 @@ public class Solution {
         return fast;
     }
 }
+// 从原点到入口，和相遇点到入口距离一样；
