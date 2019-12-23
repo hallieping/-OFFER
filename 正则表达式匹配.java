@@ -13,43 +13,22 @@
 //2、字符串后移1字符，模式后移2字符；
 //3、字符串后移1字符，模式不变，即继续匹配字符下一位，因为*可以匹配多位；
 
-public class Solution {
-    public boolean match(char[] str, char[] pattern)
-    {
-        if(str.length == 0 && pattern.length == 0)
-            return true;
-        if(str.length >0 && pattern.length == 0)
-            return false;
-        int sIndex = 0;
-        int pIndex = 0;
-        return fMatch(str,sIndex,pattern,pIndex);
-        
-    }
-    public boolean fMatch(char[] s, int sIndex, char[] p, int pIndex) {
-        if (sIndex == s.length && pIndex == p.length) {
-            return true;
+class Solution {
+    public boolean isMatch(String text, String pattern) {
+        if (pattern.isEmpty()) return text.isEmpty();
+        boolean first_match = (!text.isEmpty() &&
+                               (pattern.charAt(0) == text.charAt(0) || pattern.charAt(0) == '.'));
+
+        if (pattern.length() >= 2 && pattern.charAt(1) == '*'){
+            return (isMatch(text, pattern.substring(2)) ||
+                    (first_match && isMatch(text.substring(1), pattern)));
+        } else {
+            return first_match && isMatch(text.substring(1), pattern.substring(1));
         }
-        else if (sIndex < s.length && pIndex == p.length) {
-            return false;
-        }
-        else {
-            if(pIndex+1 < p.length && p[pIndex+1] == '*') {
-                if ((sIndex != s.length && p[pIndex] == s[sIndex]) || (p[pIndex] == '.' && sIndex != s.length)) {
-                        return fMatch(s, sIndex, p, pIndex + 2)//模式后移2，视为x*匹配0个字符
-                        || fMatch(s, sIndex + 1, p, pIndex + 2)//视为模式匹配1个字符
-                        || fMatch(s, sIndex + 1, p, pIndex);//*匹配1个，再匹配str中的下一个
-                } else {
-                return fMatch(s, sIndex, p, pIndex + 2);
-                }
-            }
-            else {
-                if((sIndex != s.length) && (s[sIndex] == p[pIndex] || p[pIndex] == '.'))
-                    return fMatch(s,sIndex+1,p,pIndex+1);
-            }
-        }
-        return false;
     }
 }
+
+
 
 //动态规划，自底向上
 class Solution {
