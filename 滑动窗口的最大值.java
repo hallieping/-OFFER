@@ -28,4 +28,23 @@ public class Solution {
         return res;
     }
 }    
-    
+   
+
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if( nums == null || nums.length == 0) return new int[]{};
+        int[] res  = new int[nums.length - k + 1];
+        int index = 0;
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        for(int i=0; i<nums.length; i++) {
+            maxHeap.offer(nums[i]);
+            if(maxHeap.size() > k) {
+                maxHeap.remove(nums[i-k]);
+            }
+            if(maxHeap.size() == k) {
+                res[index++] = maxHeap.peek();
+            }
+        }
+        return res;
+    } 
+}
