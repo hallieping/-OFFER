@@ -40,6 +40,7 @@ public class Solution {
                 start = 0;
                 result.add(layerList);
                 layerList = new ArrayList<Integer>();
+                //  注意！！！！这里不要用List.clear()，用clear会释放掉，导致result里引用的值也没了，result为空
             }
         }
         return result;
