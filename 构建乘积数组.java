@@ -19,3 +19,21 @@ public class Solution {
         return B;
     }
 }
+
+//第二个数组可以简化，用一个数组+一个变量搞定
+public class Solution {
+    public int[] multiply(int[] A) {
+        int[] B1 = new int[A.length];
+        if(A.length == 0) return A;
+        B1[0] = 1;
+        int tmp = 1;
+        for(int i=1; i<A.length; i++)
+            B1[i] = B1[i-1]*A[i-1];
+        for(int i=A.length-2; i>=0; i--) {
+            tmp *= A[i+1];
+            B1[i] *= tmp;
+        }
+        
+        return B1;
+    }
+}
