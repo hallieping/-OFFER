@@ -11,22 +11,30 @@
 
 
 public class Solution {
-    public boolean VerifySquenceOfBST(int [] sequence) {
-        if(sequence.length == 0) {
+
+    public boolean verifySequenceOfBST(in[] sequence) {
+        if (sequence.length == 0 ) {
             return false;
         }
-        return isPost(sequence,0,sequence.length-1);
+        return isPost(sequence, 0, sequence.length-1);
+    
     }
-    public boolean isPost(int[] s, int left, int right) {
-        if(left > right) return true;
-        int i = right;
-        while( i > left && s[i-1] > s[right]) 
-            i--;
-        for(int j = i-1; j>=left; j--) {
-            if(s[j] > s[right])
-                return false;
+    public boolean isPost(int[] seq, int left, int right) {
+        if (left > right) {
+            return true;
         }
-        return isPost(s,left,i-1) && isPost(s,i,right-1);
-        
-    }
+        int i = right;
+        while (i > left && seq[i-1] > seq[right]) {
+            i--;
+        }
+        for (int j=i-1; j>=left; j--) {
+            if (seq[j] > seq[right]) {
+                return false;
+            }
+        }
+        return isPost(seq, left, i-1) && isPost(s, i, right-1);
 }
+
+
+
+
